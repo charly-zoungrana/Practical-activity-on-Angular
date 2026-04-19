@@ -9,14 +9,29 @@
           <th>Selected</th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let p of products">
-          <th>{{p.id}}</th>
-          <th>{{p.name}}</th>
-          <th>{{p.price}}</th>
-          <th>{{p.selected}}</th>
-        </tr>
-      </tbody>
+      @if (products) {
+        <tbody>
+          @for (p  of products ; track p) {
+            <tr>
+              <td>{{p.id}}</td>
+              <td>{{p.name}}</td>
+              <td>{{p.price}}</td>
+              <td>
+                @if (p.selected){
+                  <i class="bi bi-check-circle"></i>
+                }@else{
+                  <i class="bi bi-circle"></i>
+                }
+              </td>
+              <td>
+                <button class="btn btn-outline-danger" (click)="handleDeleted(p)">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      }
     </table>
   </div>
 </div>

@@ -1,16 +1,24 @@
-import { Component } from '@angular/core';
-import {NgFor} from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-product',
-  imports: [NgFor],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
-export class ProductComponent {
-  products=[
-    {id:1,name:"Computer",price:2500,selected:true},
-    {id:2,name:"Printer",price:4000,selected:false},
-    {id:3,name:"Smart Phone",price:5000,selected:true},
-  ]
+export class ProductComponent implements OnInit {
+  products!:Array<any>;
+
+  constructor(){};
+
+  ngOnInit() {
+  }
+
+
+  handleDeleted(product: any) {
+    let v=confirm("Etes vous sure de vouloir supprimer ?");
+    if(v){
+      this.products=this.products.filter(p=>p.id!=product.id);
+    }
+  }
 }
